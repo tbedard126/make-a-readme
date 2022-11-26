@@ -83,7 +83,7 @@ async function init() {
 
         const readMe = generateMarkdown(answer);
 
-        writeReadME("README-Test.md", readMe).then(function () {
+        writeReadME("README.md", readMe).then(function () {
             console.log("successfully created README.md file! yay!");
         });
     }
