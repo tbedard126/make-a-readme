@@ -25,6 +25,9 @@ function generateMarkdown(data) {
 4. [Tests](#tests)
 4. [Questions](#questions)
 6. [License](#license)
+
+## Title:
+${data.title}
             
 ## Installation:
 ${data.installation}
