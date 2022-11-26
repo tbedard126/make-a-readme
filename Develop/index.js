@@ -1,54 +1,96 @@
-// TODO: Include packages needed for this application
-const inquirer = require('inquirer');
+
+
 const fs = require("fs");
-// TODO: Create an array of questions for user input
+const inquirer = require("inquirer");
+const util = require("util");
+
+//write README file
+const writeReadME = util.promisify(fs.writeFile);
+
+//Accesses generateMarkdown file 
+const generateMarkdown = require("./utils/generateMarkdown.js");
+
+// function that asks users questions
+let promptUser = () => {
+    return inquirer.prompt(questions);
+}
+
+// // TODO: Create an array of questions for user input
 const questions = [
     {
-        type: 'input',
-        message: 'What is your project title?',
-        name: 'name',
+        type: "input",
+        name: "title",
+        message: "What should the title of this README be?"
+    },
+    {
+        type: "input",
+        name: "description",
+        message: "Please describe the README"
     },
     {
         type: 'input',
-        message: 'Description',
-        name: 'languages',
+        name: 'installation',
+        message: 'How do you install this application?'
     },
     {
         type: 'input',
-        message: 'installation instructions',
-        name: 'communication',
+        name: 'usage',
+        message: 'What do you use this application for?'
     },
     {
         type: 'input',
-        message: 'usage information',
-        name: 'name',
+        name: 'contributing',
+        message: 'Who contributed to this project?'
     },
     {
         type: 'input',
-        message: 'What is your name?',
-        name: 'name',
+        name: 'tests',
+        message: 'Do you have any tests for this application? If so please describe them here.'
     },
     {
         type: 'input',
-        message: 'What is your name?',
-        name: 'name',
+        name: 'questions',
+        message: 'Enter how you would perferred to be contacted here.'
     },
     {
         type: 'input',
-        message: 'What is your name?',
-        name: 'name',
+        name: 'email',
+        message: 'What is your email?'
     },
-
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is your github?'
+    },
+    {
+        type: 'list',
+        choices: [
+            "MIT",
+            "GPL",
+            "APACHE"
+        ],
+        name: 'license',
+        message: 'Please select a license for your project:'
+    }
 ];
 
-inquirer
-    .prompt(questions)
+// function to initialize program
+async function init() {
+    try {
+        const answer = await promptUser();
+        console.log(answer);
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
 
-// TODO: Create a function to initialize app
-function init() { }
+        const readMe = generateMarkdown(answer);
 
-// Function call to initialize app
+        writeReadME("README-Test.md", readMe).then(function () {
+            console.log("successfully created README.md file! yay!");
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+}
+
 init();
