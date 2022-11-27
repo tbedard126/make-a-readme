@@ -9,7 +9,7 @@ const writeReadME = util.promisify(fs.writeFile);
 
 //Accesses generateMarkdown file 
 const generateMarkdown = require("./utils/generateMarkdown.js");
-
+// const renderLicenseLink = require("./utils/generateMarkdown.js");
 // function that asks users questions
 let promptUser = () => {
     return inquirer.prompt(questions);
@@ -67,7 +67,9 @@ const questions = [
         choices: [
             "MIT",
             "GPL",
-            "APACHE"
+            "APACHE",
+            "BSD",
+
         ],
         name: 'license',
         message: 'Please select a license for your project:'
@@ -82,7 +84,7 @@ async function init() {
 
 
         const readMe = generateMarkdown(answer);
-
+        // renderLicenseLink(licenseLink)
         writeReadME("README.md", readMe).then(function () {
             console.log("successfully created README.md file! yay!");
         });
