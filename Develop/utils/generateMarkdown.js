@@ -1,14 +1,7 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  let badge = "";
+// function renderLicenseBadge(license) {
 
-  if (license != "None") {
-    badge = `![License Badge](https://shields.io/badge/license-${license}-green)`;
-  }
-
-  return badge;
-}
 
 
 // TODO: Create a function that returns the license link
@@ -16,7 +9,7 @@ function renderLicenseBadge(license) {
 function renderLicenseLink(license) {
   let licenseLink;
 
-  // select correct license link for the selected license
+  // selects the license link for the selected license
   switch (license) {
     case "MIT":
       licenseLink = "https://mit-license.org/";
@@ -35,20 +28,6 @@ function renderLicenseLink(license) {
       break;
   }
 }
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-// function renderLicenseSection(license) {
-//   let licenseSect = "";
-
-//   // if a license has been selected, create License section
-//   // with link to license information
-//   if (license != "None") {
-//     licenseSect += "## License\n"
-//     licenseSect += `Please see${licenseLink}to get detailed information for this license\n`;
-//   }
-
-//   return licenseSect;
-// }
 
 // TODO: Create a function to generate markdown for README
 
@@ -56,17 +35,22 @@ function generateMarkdown(data) {
   console.log(data);
   // renderLicenseLink(licenseLink)
   return `# ${data.title}
-## ${data.description}
-            
-## Table of Contents:
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Contributing](#contributing)
-4. [Tests](#tests)
-4. [Questions](#questions)
-6. [License](#license)
+  ![${data.license}](https://img.shields.io/badge/license-${data.license}-blue)
 
             
+## Table of Contents:
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [Tests](#tests)
+6. [Questions](#questions)
+7. [License](#license)
+
+## Description:
+${data.description}          
+
+
 ## Installation:
 ${data.installation}
             
@@ -87,7 +71,7 @@ GitHub:
 \n
 ${data.questions}
 ## License:
-![${data.license}](https://img.shields.io/badge/license-${data.license}-blue)
+
   ${data.license}
   
   
